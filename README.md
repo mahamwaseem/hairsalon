@@ -1,70 +1,282 @@
-# Getting Started with Create React App
+# Peluquero Hermano - Barbershop Appointment Booking System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An elegant and modern web application for booking appointments at a barbershop. Built with **React** and designed with a sophisticated warm theme featuring cream, dusty rose, and golden brass accents.
 
-## Available Scripts
+## ✨ Key Features
 
-In the project directory, you can run:
+### Modern and Elegant Interface
+- Sophisticated warm color palette with gradients and visual effects
+- Fully responsive and mobile-friendly design
+- Smooth animations and fluid transitions
+- Elegant typography with Georgia serif font
 
-### `npm start`
+### 🎯 Intuitive 6-Step Booking Flow
+1. **Select Service** - Choose from 6 different services
+2. **Choose Barber** - Select your preferred barber
+3. **Select Date & Time** - Interactive calendar + time slot selector
+4. **Enter Details** - Complete your contact information
+5. **Review Summary** - Verify all information before confirming
+6. **Confirmation** - Receive unique booking code
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 💈 Available Services
+- Classic Haircut (€18, 30 min)
+- Haircut + Beard (€28, 50 min)
+- Straight Razor Shave (€22, 40 min)
+- Modern Fade (€20, 35 min)
+- Hair Treatment (€35, 60 min)
+- Gentleman's Package (€65, 90 min)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 👨 Available Barbers
+- Carlos Hermano - Specialist in Fades & Fade Cuts
+- Miguel Ángel - Expert in Beard Grooming & Shaving
+- Diego Ruiz - Master of Classic & Vintage Styles
+- No Preference - Any available barber
 
-### `npm test`
+## 🛠️ Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React 19** - Modern UI framework
+- **JavaScript ES6+** - Programming language
+- **CSS-in-JS (inline styles)** - Dynamic styling
+- **React Hooks** - useState for state management
 
-### `npm run build`
+## 📋 Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js v14 or higher
+- npm or yarn
+- A terminal/CMD
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Installation & Running
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Navigate to project folder
+```bash
+cd "e:\JS projects\hairsalon"
+```
 
-### `npm run eject`
+### 2. Install dependencies
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Start development server
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will automatically open at http://localhost:3000
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4. Stop the server
+Press `Ctrl+C` in the terminal
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📦 Build for Production
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Generates an optimized version in the `build/` folder.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📁 Project Structure
 
-### Code Splitting
+```
+hairsalon/
+├── public/
+│   ├── index.html          # Main HTML file
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── App.js              # Main component (everything is here)
+│   ├── App.css             # Minimal global styles
+│   ├── index.js            # React entry point
+│   ├── index.css           # Base styles
+│   └── ...other files
+├── package.json            # Project dependencies
+└── README.md               # This file
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🎨 Color Palette
 
-### Analyzing the Bundle Size
+```
+Color Theme: Warm Cream + Dusty Rose + Golden Brass
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Main Background: #ede8e0 (warm cream)
+- Secondary Background: #f5f1ea (light cream)
+- Cards: #faf8f5 (off-white)
+- Primary Accent (Dusty Rose): #9d6b5c
+- Light Accent: #b8907e
+- Dark Accent: #6d4a41
+- Golden Brass: #c9a661
+- Light Golden: #ddb876
+- Text: #5a4a38 (warm brown)
+- Text Medium: rgba(90,74,56,0.75)
+- Text Dim: rgba(90,74,56,0.55)
+```
 
-### Making a Progressive Web App
+## 🔧 Main Components & Hooks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Hook: `useCalendar`
+Manages all calendar logic:
+- Navigation between months
+- Calculation of available days
+- Current day detection
+- Prevention of past dates
 
-### Advanced Configuration
+```javascript
+const cal = useCalendar(date, setDate);
+// cal.label, cal.cells, cal.changeMonth(), cal.isSel(), etc.
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Hook: `useToast`
+Display temporary notifications to the user:
 
-### Deployment
+```javascript
+const { msg, show, showToast } = useToast();
+showToast("✅ Booking confirmed!");
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Main Component: `PeluqueroHermano`
+- Manages 6 steps of the booking flow
+- Validates data before advancing
+- Generates unique confirmation code
+- Handles all application state
 
-### `npm run build` fails to minify
+## ✅ Validation & UX Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- ✅ Required selection validation with toast notifications
+- ✅ Form field validation (name, phone, email)
+- ✅ Unique booking code generation (format: PH-XXXX)
+- ✅ Smooth navigation between steps with auto-scroll
+- ✅ Option to edit information before confirming
+- ✅ Ability to create new reservation (complete reset)
+- ✅ Visual indicator of completed steps
+- ✅ Clearly marked occupied time slots
+
+## 📊 Predefined Data
+
+### Occupied Time Slots
+- 09:00, 10:30, 12:00, 16:30, 18:00
+- (Displayed with strikethrough in the UI)
+
+### Available Time Slots
+- 09:00 to 20:00 in 30-minute intervals
+- Total: 18 time slots
+
+### Available Dates
+- All future dates from today onwards
+- Interactive calendar with month navigation
+
+## 🎯 How to Customize
+
+### Change Services
+Edit the `SERVICES` array in `src/App.js`:
+```javascript
+const SERVICES = [
+  { icon: "💈", name: "My Service", price: 25, dur: "45 min" },
+  // ...
+];
+```
+
+### Change Barbers
+Edit the `BARBERS` array in `src/App.js`:
+```javascript
+const BARBERS = [
+  { emoji: "🧑‍🦱", name: "Barber Name", spec: "Specialty" },
+  // ...
+];
+```
+
+### Change Occupied Time Slots
+Edit the `TIMES_OCCUPIED` Set in `src/App.js`:
+```javascript
+const TIMES_OCCUPIED = new Set(["09:00","10:30","12:00"]);
+```
+
+### Change Available Time Slots
+Edit the `ALL_TIMES` array in `src/App.js`:
+```javascript
+const ALL_TIMES = ["09:00","09:30","10:00",...];
+```
+
+## 📝 Barbershop Information
+
+**Peluquero Hermano**
+- 📍 Calle Mayor 42, Madrid
+- 📞 +34 91 000 00 00
+- 🕐 Mon–Sat: 9:00 – 20:00
+
+## ⚠️ Important Notes
+
+1. **No Data Persistence**: Booking data is stored only in application memory. For production, you would need to connect a database.
+
+2. **Static Time Slots**: Occupied time slots are predefined and do not update in real-time.
+
+3. **Unique Codes**: Booking codes are generated randomly without uniqueness validation.
+
+4. **Client-Side Validation**: All validation occurs in the browser. For production, add server-side validation.
+
+## 🔄 Data Flow
+
+```
+User selects service
+        ↓
+User selects barber
+        ↓
+User selects date & time
+        ↓
+User enters contact details
+        ↓
+User reviews summary
+        ↓
+User confirms booking
+        ↓
+Confirmation code is generated
+        ↓
+Success screen is displayed
+        ↓
+User can create new reservation
+```
+
+## 🐛 Troubleshooting
+
+### Application fails to start
+```bash
+# Delete node_modules and install again
+rm -r node_modules
+npm install
+npm start
+```
+
+### Port 3000 is already in use
+```bash
+npm start -- --port 3001
+```
+
+### Styles are not applied
+- Clear browser cache (Ctrl+Shift+Del)
+- Reload the page (Ctrl+R)
+
+## 📚 Useful Resources
+
+- [React Documentation](https://react.dev/)
+- [React Hooks](https://react.dev/reference/react/hooks)
+- [MDN Web Docs](https://developer.mozilla.org/)
+
+## 📄 License
+
+This project is open source under the MIT license.
+
+## 👨‍💻 Future Development
+
+Possible improvements:
+- [ ] Connect to backend/database
+- [ ] User authentication system
+- [ ] Email/SMS notifications
+- [ ] Admin dashboard
+- [ ] Dynamic availability management
+- [ ] Payment system
+- [ ] User booking history
+- [ ] Reservation cancellation
+- [ ] Automatic reminders
+
+---
+
+**Thank you for using Peluquero Hermano!** ✂️
