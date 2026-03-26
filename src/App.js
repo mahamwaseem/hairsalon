@@ -2,19 +2,23 @@ import { useState } from "react";
 
 // ─── THEME: Warm Dark + Dusty Rose + Golden Brass ───────────────────────────────
 const T = {
-  bg:       "#ede8e0",
-  bg2:      "#f5f1ea",
-  card:     "#faf8f5",
-  border:   "rgba(157,107,92,0.18)",
-  borderHi: "#9d6b5c",
-  accent:   "#9d6b5c",   // dusty rose/mauve
-  accentLt: "#b8907e",   // light dusty rose
-  accentDk: "#6d4a41",   // dark dusty rose
-  brass:    "#c9a661",   // golden brass (more prominent)
-  brassLt:  "#ddb876",   // light golden
-  text:     "#5a4a38",   // warm brown (not black)
-  textMid:  "rgba(90,74,56,0.75)",
-  textDim:  "rgba(90,74,56,0.55)",
+  bg:       "#285A48",
+  bg2:      "#336d58",
+  card:     "#285A48",
+
+  border:   "#408A71",
+  borderHi: "#408A71",
+
+  accent:   "#FEF3E2",   
+  accentLt: "#FFEEA9",
+  accentDk: "#408A71",
+
+  brass:    "#FABC3F",   
+  brassLt:  "#B0E4CC",
+
+  text:     "#ffffff",
+  textMid:  "#B0E4CC",
+  textDim:  "B0E4CC",
 };
 
 // ─── INLINE STYLES ─────────────────────────────────────────────────────────
@@ -267,7 +271,7 @@ const S = {
     display: "flex", gap: 24, justifyContent: "center", padding: "20px",
     borderTop: `1px solid rgba(157,107,92,0.08)`, marginTop: 16, flexWrap: "wrap",
   },
-  infoItem: { display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "rgba(157,107,92,0.4)", letterSpacing: 1 },
+  infoItem: { display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "#B0E4CC", letterSpacing: 1 },
   // Toast
   toast: (show) => ({
     position: "fixed", bottom: 30, left: "50%",
