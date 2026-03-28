@@ -1,94 +1,429 @@
 import { useState, useEffect, useRef } from "react";
+import logo from './assets/logo.png';
 
 const heroSlides = [
   {
-    img: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1400&q=90",
-    heading: "Where Every Cut",
-    sub: "Tells a Story",
-    tag: "Master Styling",
+    img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1400&q=90",
+    heading: "Donde Cada Corte",
+    sub: "Cuenta una Historia",
+    tag: "Maestría en Estilo",
   },
   {
-    img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1400&q=90",
-    heading: "Color That",
-    sub: "Captivates",
-    tag: "Premium Color",
+    img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1400&q=90",
+    heading: "Barba y Cabello",
+    sub: "Con Precisión",
+    tag: "Grooming Premium",
   },
   {
-    img: "https://images.unsplash.com/photo-1519741347686-c1e331fcba41?w=1400&q=90",
-    heading: "Bridal Beauty",
-    sub: "Beyond Compare",
-    tag: "Bridal Packages",
+    img: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1400&q=90",
+    heading: "El Arte del",
+    sub: "Caballero Moderno",
+    tag: "Experiencia Única",
   },
   {
-    img: "https://images.unsplash.com/photo-1470259078422-826894b933aa?w=1400&q=90",
-    heading: "Luxury Spa",
-    sub: "Pure Indulgence",
-    tag: "Spa & Wellness",
+    img: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1400&q=90",
+    heading: "Lujo y",
+    sub: "Distinción",
+    tag: "Tratamientos VIP",
   },
 ];
 
 const services = [
   {
-    title: "Signature Cut",
-    desc: "Sculpted by master stylists, tailored to your unique face structure and personality.",
-    price: "From Rs. 2,500",
-    img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80",
+    title: "Corte de Caballero",
+    desc: "Esculpido por maestros estilistas, adaptado a tu estructura facial y personalidad única.",
+    price: "Desde €18",
+    img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80",
   },
   {
-    title: "Luxury Color",
-    desc: "Balayage, highlights & rich tones using premium European Schwarzkopf pigments.",
-    price: "From Rs. 5,000",
-    img: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&q=80",
+    title: "Arreglo de Barba",
+    desc: "Perfilado, degradado y acabado de barba con productos premium de aceite y cera.",
+    price: "Desde €12",
+    img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80",
   },
   {
-    title: "Royal Spa",
-    desc: "Deep-tissue treatments, gold masks & aromatherapy rituals for total renewal.",
-    price: "From Rs. 3,800",
-    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
+    title: "Corte & Barba",
+    desc: "El combo perfecto — corte de cabello y arreglo de barba en una sola sesión de lujo.",
+    price: "Desde €28",
+    img: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80",
   },
   {
-    title: "Bridal Glam",
-    desc: "Complete bridal packages — hair, makeup & skin prep for your most perfect day.",
-    price: "From Rs. 15,000",
-    img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80",
+    title: "Tratamiento Capilar",
+    desc: "Hidratación profunda, masaje de cuero cabelludo y tratamientos anti-caída para hombres.",
+    price: "Desde €35",
+    img: "https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=600&q=80",
   },
 ];
 
 const gallery = [
-  "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=500&q=80",
-  "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=80",
-  "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&q=80",
-  "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=500&q=80",
-  "https://images.unsplash.com/photo-1500840216050-6ffa99d75160?w=500&q=80",
-  "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=500&q=80",
-  "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500&q=80",
-  "https://images.unsplash.com/photo-1614644147724-2d4785d69962?w=500&q=80",
+  "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80",
+  "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&q=80",
+  "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80",
+  "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500&q=80",
+  "https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=500&q=80",
+  "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=500&q=80",
+  "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500&q=80",
+  "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&q=80",
 ];
 
 const testimonials = [
   {
-    name: "Ayesha Malik",
-    role: "Fashion Designer",
-    text: "Peluquero Hermano completely transformed my look. Every single visit feels like stepping into a five-star experience.",
-    avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&q=80",
+    name: "Carlos Martínez",
+    role: "Empresario",
+    text: "Peluquero Hermano transformó completamente mi imagen. Cada visita es una experiencia de cinco estrellas que no encontrarás en ningún otro lugar.",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&q=80",
   },
   {
-    name: "Sara Khan",
-    role: "TV Presenter",
-    text: "I have been to salons across Pakistan — none compare to the artistry and warmth of this place. Simply the best.",
-    avatar: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&q=80",
+    name: "Alejandro García",
+    role: "Director Creativo",
+    text: "He visitado barberías por toda España — ninguna se compara con la maestría y calidez de este lugar. Simplemente el mejor.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80",
   },
   {
-    name: "Nadia Hussain",
-    role: "Entrepreneur",
-    text: "My bridal look was absolutely flawless. The team at Peluquero Hermano made me feel like pure royalty.",
-    avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&q=80",
+    name: "Miguel Rodríguez",
+    role: "Arquitecto",
+    text: "El equipo de Peluquero Hermano tiene un talento extraordinario. Mi corte siempre es perfecto y el ambiente es inigualable.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80",
   },
 ];
 
+const timeSlots = ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30"];
+
+function BookingPage({ onBack }) {
+  const [step, setStep] = useState(1);
+  const [selectedService, setSelectedService] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [formData, setFormData] = useState({ nombre: "", email: "", telefono: "", notas: "" });
+  const [confirmed, setConfirmed] = useState(false);
+
+  const today = new Date();
+  const [calMonth, setCalMonth] = useState(today.getMonth());
+  const [calYear, setCalYear] = useState(today.getFullYear());
+
+  const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  const dias = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+
+  function getDaysInMonth(month, year) {
+    return new Date(year, month + 1, 0).getDate();
+  }
+  function getFirstDayOfMonth(month, year) {
+    let d = new Date(year, month, 1).getDay();
+    return d === 0 ? 6 : d - 1;
+  }
+
+  const daysInMonth = getDaysInMonth(calMonth, calYear);
+  const firstDay = getFirstDayOfMonth(calMonth, calYear);
+
+  function handleConfirm() {
+    if (!formData.nombre || !formData.email || !formData.telefono) return;
+    setConfirmed(true);
+  }
+
+  if (confirmed) {
+    return (
+      <div style={{
+        minHeight: "100vh", background: "#faf9f7",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "40px 20px", fontFamily: "'Raleway', sans-serif",
+      }}>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap');`}</style>
+        <div style={{
+          background: "white", border: "1px solid rgba(184,149,42,0.2)",
+          boxShadow: "0 20px 80px rgba(184,149,42,0.12)",
+          padding: "60px 50px", maxWidth: 540, width: "100%",
+          textAlign: "center",
+        }}>
+          <div style={{ fontSize: 64, marginBottom: 20 }}>✂️</div>
+          <div style={{
+            width: 70, height: 1.5,
+            background: "linear-gradient(to right, transparent, #b8952a, transparent)",
+            margin: "0 auto 24px",
+          }} />
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 36, fontWeight: 400, color: "#1a1208", margin: "0 0 16px" }}>
+            ¡Cita <em style={{ color: "#b8952a" }}>Confirmada!</em>
+          </h2>
+          <p style={{ color: "#8a7c6e", lineHeight: 1.8, marginBottom: 32, fontSize: 14 }}>
+            Gracias, <strong>{formData.nombre}</strong>. Tu cita ha sido reservada para el <strong>{selectedDate} de {meses[calMonth]}</strong> a las <strong>{selectedTime}</strong> para <strong>{selectedService}</strong>.
+            <br /><br />Recibirás una confirmación en <strong>{formData.email}</strong>.
+          </p>
+          <button onClick={onBack} style={{
+            background: "linear-gradient(135deg, #b8952a, #d4ac3a, #b8952a)",
+            color: "white", border: "none", padding: "14px 36px",
+            fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+            textTransform: "uppercase", cursor: "pointer", fontWeight: 600,
+          }}>
+            Volver al Inicio
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#faf9f7", fontFamily: "'Raleway', sans-serif" }}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .step-btn { transition: all 0.3s; cursor: pointer; }
+        .step-btn:hover { transform: translateY(-2px); }
+        .slot-btn { transition: all 0.25s; cursor: pointer; border: 1.5px solid rgba(184,149,42,0.3); background: white; padding: 10px 14px; font-family: 'Raleway', sans-serif; font-size: 12px; color: #8a7c6e; }
+        .slot-btn:hover { border-color: #b8952a; color: #b8952a; }
+        .slot-btn.active { background: #b8952a; color: white; border-color: #b8952a; }
+        .svc-card { transition: all 0.3s; cursor: pointer; border: 1.5px solid rgba(184,149,42,0.2); background: white; padding: 24px; }
+        .svc-card:hover { border-color: #b8952a; box-shadow: 0 8px 30px rgba(184,149,42,0.12); transform: translateY(-3px); }
+        .svc-card.active { border-color: #b8952a; background: #fdf8ee; box-shadow: 0 8px 30px rgba(184,149,42,0.18); }
+        .form-inp { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(184,149,42,0.3); color: #1a1208; padding: 14px 0; font-family: 'Raleway', sans-serif; font-size: 13px; outline: none; transition: border-color 0.3s; }
+        .form-inp:focus { border-bottom-color: #b8952a; }
+        .form-inp::placeholder { color: rgba(138,124,110,0.5); }
+        .cal-day { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 13px; cursor: pointer; border-radius: 50%; transition: all 0.2s; }
+        .cal-day:hover:not(.disabled):not(.past) { background: rgba(184,149,42,0.15); color: #b8952a; }
+        .cal-day.active { background: #b8952a; color: white; }
+        .cal-day.disabled { color: rgba(138,124,110,0.3); cursor: default; }
+        .cal-day.past { color: rgba(138,124,110,0.25); cursor: default; }
+      `}</style>
+
+      {/* Header */}
+      <div style={{
+        background: "#1a1208", padding: "20px 60px",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        borderBottom: "2px solid #b8952a",
+      }}>
+        <button onClick={onBack} style={{
+          background: "none", border: "1px solid rgba(184,149,42,0.4)",
+          color: "rgba(184,149,42,0.8)", padding: "8px 20px",
+          fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+          textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s",
+        }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = "#b8952a"; e.currentTarget.style.color = "#b8952a"; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(184,149,42,0.4)"; e.currentTarget.style.color = "rgba(184,149,42,0.8)"; }}>
+          ← Volver
+        </button>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, letterSpacing: 4, color: "#d4ac3a" }}>PELUQUERO</div>
+          <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 8, letterSpacing: 7, color: "rgba(212,172,58,0.6)", marginTop: 1 }}>HERMANO</div>
+        </div>
+        <div style={{ width: 100 }} />
+      </div>
+
+      {/* Steps indicator */}
+      <div style={{ background: "white", padding: "24px 60px", borderBottom: "1px solid rgba(184,149,42,0.12)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, maxWidth: 600, margin: "0 auto" }}>
+          {[
+            { n: 1, label: "Servicio" },
+            { n: 2, label: "Fecha & Hora" },
+            { n: 3, label: "Tus Datos" },
+          ].map((s, i) => (
+            <div key={s.n} style={{ display: "flex", alignItems: "center", flex: 1, justifyContent: i === 1 ? "center" : i === 0 ? "flex-start" : "flex-end" }}>
+              {i > 0 && <div style={{ flex: 1, height: 1, background: step > i ? "#b8952a" : "rgba(184,149,42,0.2)", margin: "0 12px" }} />}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+                <div style={{
+                  width: 36, height: 36, borderRadius: "50%",
+                  background: step >= s.n ? "#b8952a" : "white",
+                  border: `1.5px solid ${step >= s.n ? "#b8952a" : "rgba(184,149,42,0.3)"}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: step >= s.n ? "white" : "#8a7c6e",
+                  fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 500,
+                  transition: "all 0.4s",
+                }}>{s.n}</div>
+                <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 9, letterSpacing: 2, color: step >= s.n ? "#b8952a" : "#8a7c6e", textTransform: "uppercase" }}>{s.label}</div>
+              </div>
+              {i < 2 && <div style={{ flex: 1, height: 1, background: step > s.n ? "#b8952a" : "rgba(184,149,42,0.2)", margin: "0 12px" }} />}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "50px 30px" }}>
+
+        {/* STEP 1: Service selection */}
+        {step === 1 && (
+          <div>
+            <div style={{ textAlign: "center", marginBottom: 40 }}>
+              <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 5, color: "#b8952a", textTransform: "uppercase", marginBottom: 12 }}>Paso 1</div>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 42, fontWeight: 400, color: "#1a1208" }}>
+                Elige tu <em style={{ color: "#b8952a" }}>Servicio</em>
+              </h2>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginBottom: 40 }}>
+              {services.map(s => (
+                <div key={s.title} className={`svc-card${selectedService === s.title ? " active" : ""}`}
+                  onClick={() => setSelectedService(s.title)}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 400, color: "#1a1208" }}>{s.title}</h3>
+                    {selectedService === s.title && <div style={{ color: "#b8952a", fontSize: 18 }}>✓</div>}
+                  </div>
+                  <p style={{ fontSize: 12, color: "#8a7c6e", lineHeight: 1.7, marginBottom: 12 }}>{s.desc}</p>
+                  <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 13, fontWeight: 600, color: "#b8952a" }}>{s.price}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button className="step-btn" onClick={() => selectedService && setStep(2)} style={{
+                background: selectedService ? "linear-gradient(135deg, #b8952a, #d4ac3a, #b8952a)" : "rgba(184,149,42,0.2)",
+                color: selectedService ? "white" : "#b8952a",
+                border: "none", padding: "15px 40px",
+                fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+                textTransform: "uppercase", cursor: selectedService ? "pointer" : "not-allowed", fontWeight: 600,
+                boxShadow: selectedService ? "0 4px 20px rgba(184,149,42,0.3)" : "none",
+                transition: "all 0.3s",
+              }}>
+                Continuar →
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* STEP 2: Date & Time */}
+        {step === 2 && (
+          <div>
+            <div style={{ textAlign: "center", marginBottom: 40 }}>
+              <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 5, color: "#b8952a", textTransform: "uppercase", marginBottom: 12 }}>Paso 2</div>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 42, fontWeight: 400, color: "#1a1208" }}>
+                Fecha & <em style={{ color: "#b8952a" }}>Hora</em>
+              </h2>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
+              {/* Calendar */}
+              <div style={{ background: "white", border: "1px solid rgba(184,149,42,0.15)", padding: "28px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+                  <button onClick={() => { if (calMonth === 0) { setCalMonth(11); setCalYear(y => y - 1); } else setCalMonth(m => m - 1); }}
+                    style={{ background: "none", border: "1px solid rgba(184,149,42,0.3)", color: "#b8952a", width: 32, height: 32, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, color: "#1a1208" }}>
+                    {meses[calMonth]} {calYear}
+                  </div>
+                  <button onClick={() => { if (calMonth === 11) { setCalMonth(0); setCalYear(y => y + 1); } else setCalMonth(m => m + 1); }}
+                    style={{ background: "none", border: "1px solid rgba(184,149,42,0.3)", color: "#b8952a", width: 32, height: 32, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 2, marginBottom: 8 }}>
+                  {dias.map(d => (
+                    <div key={d} style={{ textAlign: "center", fontSize: 10, letterSpacing: 1, color: "#b8952a", fontFamily: "'Raleway', sans-serif", fontWeight: 600, padding: "4px 0" }}>{d}</div>
+                  ))}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 2 }}>
+                  {Array(firstDay).fill(null).map((_, i) => <div key={`e${i}`} />)}
+                  {Array(daysInMonth).fill(null).map((_, i) => {
+                    const day = i + 1;
+                    const isPast = calYear === today.getFullYear() && calMonth === today.getMonth() && day < today.getDate();
+                    const isSelected = selectedDate === day && true;
+                    const isSunday = new Date(calYear, calMonth, day).getDay() === 0;
+                    return (
+                      <div key={day}
+                        className={`cal-day${isPast || isSunday ? " past" : ""}${isSelected ? " active" : ""}`}
+                        onClick={() => !isPast && !isSunday && setSelectedDate(day)}
+                        style={{ justifySelf: "center" }}>
+                        {day}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div style={{ marginTop: 16, fontFamily: "'Raleway', sans-serif", fontSize: 10, color: "rgba(138,124,110,0.6)", letterSpacing: 1 }}>
+                  * Cerrado los domingos
+                </div>
+              </div>
+
+              {/* Time slots */}
+              <div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, color: "#1a1208", marginBottom: 20 }}>
+                  {selectedDate ? `${selectedDate} de ${meses[calMonth]}` : "Selecciona una fecha"}
+                </div>
+                {selectedDate ? (
+                  <div>
+                    <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3, color: "#b8952a", textTransform: "uppercase", marginBottom: 16 }}>Horarios disponibles</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                      {timeSlots.map(t => (
+                        <button key={t} className={`slot-btn${selectedTime === t ? " active" : ""}`}
+                          onClick={() => setSelectedTime(t)}>
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ color: "rgba(138,124,110,0.5)", fontSize: 13, fontStyle: "italic" }}>
+                    Primero selecciona una fecha en el calendario
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 40 }}>
+              <button className="step-btn" onClick={() => setStep(1)} style={{
+                background: "none", border: "1px solid rgba(184,149,42,0.4)", color: "#b8952a",
+                padding: "14px 36px", fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+                textTransform: "uppercase", cursor: "pointer",
+              }}>← Atrás</button>
+              <button className="step-btn" onClick={() => selectedDate && selectedTime && setStep(3)} style={{
+                background: selectedDate && selectedTime ? "linear-gradient(135deg, #b8952a, #d4ac3a, #b8952a)" : "rgba(184,149,42,0.2)",
+                color: selectedDate && selectedTime ? "white" : "#b8952a",
+                border: "none", padding: "15px 40px",
+                fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+                textTransform: "uppercase", cursor: selectedDate && selectedTime ? "pointer" : "not-allowed", fontWeight: 600,
+                boxShadow: selectedDate && selectedTime ? "0 4px 20px rgba(184,149,42,0.3)" : "none",
+              }}>Continuar →</button>
+            </div>
+          </div>
+        )}
+
+        {/* STEP 3: Contact info */}
+        {step === 3 && (
+          <div>
+            <div style={{ textAlign: "center", marginBottom: 40 }}>
+              <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 5, color: "#b8952a", textTransform: "uppercase", marginBottom: 12 }}>Paso 3</div>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 42, fontWeight: 400, color: "#1a1208" }}>
+                Tus <em style={{ color: "#b8952a" }}>Datos</em>
+              </h2>
+            </div>
+
+            {/* Summary */}
+            <div style={{ background: "#fdf8ee", border: "1px solid rgba(184,149,42,0.2)", padding: "24px 28px", marginBottom: 36, display: "flex", gap: 40 }}>
+              {[["Servicio", selectedService], ["Fecha", `${selectedDate} ${meses[calMonth]}`], ["Hora", selectedTime]].map(([k, v]) => (
+                <div key={k}>
+                  <div style={{ fontFamily: "'Raleway', sans-serif", fontSize: 9, letterSpacing: 3, color: "#b8952a", textTransform: "uppercase", marginBottom: 4 }}>{k}</div>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, color: "#1a1208" }}>{v}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+                <input className="form-inp" placeholder="Nombre completo *"
+                  value={formData.nombre} onChange={e => setFormData(p => ({ ...p, nombre: e.target.value }))} />
+                <input className="form-inp" placeholder="Correo electrónico *" type="email"
+                  value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+                <input className="form-inp" placeholder="Teléfono *"
+                  value={formData.telefono} onChange={e => setFormData(p => ({ ...p, telefono: e.target.value }))} />
+                <textarea className="form-inp" placeholder="Notas adicionales (opcional)" rows={3}
+                  style={{ resize: "none" }}
+                  value={formData.notas} onChange={e => setFormData(p => ({ ...p, notas: e.target.value }))} />
+              </div>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 40 }}>
+              <button className="step-btn" onClick={() => setStep(2)} style={{
+                background: "none", border: "1px solid rgba(184,149,42,0.4)", color: "#b8952a",
+                padding: "14px 36px", fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+                textTransform: "uppercase", cursor: "pointer",
+              }}>← Atrás</button>
+              <button className="step-btn" onClick={handleConfirm} style={{
+                background: "linear-gradient(135deg, #b8952a, #d4ac3a, #b8952a)",
+                color: "white", border: "none", padding: "15px 40px",
+                fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: 3,
+                textTransform: "uppercase", cursor: "pointer", fontWeight: 600,
+                boxShadow: "0 4px 20px rgba(184,149,42,0.35)",
+              }}>Confirmar Cita ✓</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function PeluqueroHermano() {
+  const [showBooking, setShowBooking] = useState(false);
   const [slide, setSlide] = useState(0);
-  const [prevSlide, setPrevSlide] = useState(null);
   const [transitioning, setTransitioning] = useState(false);
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -96,602 +431,302 @@ export default function PeluqueroHermano() {
   const [menuOpen, setMenuOpen] = useState(false);
   const sectionRefs = useRef({});
 
-  // Hero slideshow
   useEffect(() => {
     const timer = setInterval(() => {
-      goToSlide((prev) => (prev + 1) % heroSlides.length);
+      setTransitioning(true);
+      setTimeout(() => { setSlide(p => (p + 1) % heroSlides.length); setTransitioning(false); }, 600);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
 
-  function goToSlide(nextFn) {
-    setTransitioning(true);
-    setTimeout(() => {
-      setSlide(nextFn);
-      setTransitioning(false);
-    }, 600);
-  }
-
   function manualSlide(i) {
     if (i === slide) return;
     setTransitioning(true);
-    setTimeout(() => {
-      setSlide(i);
-      setTransitioning(false);
-    }, 600);
+    setTimeout(() => { setSlide(i); setTransitioning(false); }, 600);
   }
 
-  // Testimonials auto-rotate
   useEffect(() => {
     const t = setInterval(() => setTestimonialIdx(p => (p + 1) % testimonials.length), 4500);
     return () => clearInterval(t);
   }, []);
 
-  // Scroll detection
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Intersection observer for scroll-in animations
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setVisibleSections(prev => ({ ...prev, [entry.target.id]: true }));
-          }
-        });
-      },
+      (entries) => entries.forEach(entry => {
+        if (entry.isIntersecting) setVisibleSections(prev => ({ ...prev, [entry.target.id]: true }));
+      }),
       { threshold: 0.15 }
     );
     Object.values(sectionRefs.current).forEach(el => el && observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
-  const registerRef = (id) => (el) => {
-    sectionRefs.current[id] = el;
-  };
-
+  const registerRef = (id) => (el) => { sectionRefs.current[id] = el; };
   const isVisible = (id) => visibleSections[id];
 
+  if (showBooking) return <BookingPage onBack={() => setShowBooking(false)} />;
+
   return (
-    <div style={{
-      fontFamily: "'Georgia', serif",
-      background: "#faf9f7",
-      color: "#1a1208",
-      margin: 0, padding: 0,
-      overflowX: "hidden",
-    }}>
+    <div style={{ fontFamily: "'Georgia', serif", background: "#faf9f7", color: "#1a1208", margin: 0, padding: 0, overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap');
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-          --gold: #b8952a;
-          --gold-light: #d4ac3a;
-          --gold-pale: #e8c96a;
-          --gold-bg: #fdf8ee;
-          --white: #ffffff;
-          --cream: #faf9f7;
-          --warm-gray: #8a7c6e;
-          --dark: #1a1208;
-        }
-
+        :root { --gold: #b8952a; --gold-light: #d4ac3a; --gold-pale: #e8c96a; --gold-bg: #fdf8ee; --white: #ffffff; --cream: #faf9f7; --warm-gray: #8a7c6e; --dark: #1a1208; }
         .serif { font-family: 'Playfair Display', Georgia, serif; }
         .sans  { font-family: 'Raleway', sans-serif; }
-
-        /* SCROLLBAR */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #faf9f7; }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
-        /* NAV LINKS */
-        .nav-link {
-          font-family: 'Raleway', sans-serif;
-          font-size: 10px; letter-spacing: 3px;
-          text-transform: uppercase; color: var(--warm-gray);
-          text-decoration: none; transition: color 0.3s;
-          cursor: pointer; position: relative;
-        }
-        .nav-link::after {
-          content: ''; position: absolute; bottom: -4px; left: 0;
-          width: 0; height: 1px; background: var(--gold);
-          transition: width 0.3s ease;
-        }
+        .nav-link { font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--warm-gray); text-decoration: none; transition: color 0.3s; cursor: pointer; position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
         .nav-link:hover { color: var(--gold); }
         .nav-link:hover::after { width: 100%; }
-
-        /* BUTTONS */
-        .btn-gold {
-          background: linear-gradient(135deg, #b8952a 0%, #d4ac3a 50%, #b8952a 100%);
-          background-size: 200% auto;
-          color: white; border: none;
-          padding: 15px 40px;
-          font-family: 'Raleway', sans-serif;
-          font-size: 10px; letter-spacing: 3px;
-          text-transform: uppercase; cursor: pointer;
-          transition: background-position 0.5s, transform 0.2s, box-shadow 0.3s;
-          font-weight: 600;
-          box-shadow: 0 4px 20px rgba(184,149,42,0.3);
-        }
-        .btn-gold:hover {
-          background-position: right center;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(184,149,42,0.45);
-        }
-        .btn-outline {
-          background: transparent;
-          color: var(--gold); border: 1.5px solid var(--gold);
-          padding: 14px 40px;
-          font-family: 'Raleway', sans-serif;
-          font-size: 10px; letter-spacing: 3px;
-          text-transform: uppercase; cursor: pointer;
-          transition: all 0.3s; font-weight: 500;
-        }
-        .btn-outline:hover {
-          background: var(--gold); color: white;
-          box-shadow: 0 4px 20px rgba(184,149,42,0.3);
-        }
-
-        /* HERO SLIDE TRANSITIONS */
-        .slide-img {
-          position: absolute; inset: 0;
-          width: 100%; height: 100%; object-fit: cover;
-          transition: opacity 0.8s ease, transform 8s ease;
-        }
-        .slide-img.active { opacity: 1; transform: scale(1.06); }
-        .slide-img.inactive { opacity: 0; transform: scale(1); }
-
-        /* SCROLL ANIMATIONS */
-        .reveal {
-          opacity: 0; transform: translateY(40px);
-          transition: opacity 0.8s ease, transform 0.8s ease;
-        }
+        .btn-gold { background: linear-gradient(135deg, #b8952a 0%, #d4ac3a 50%, #b8952a 100%); background-size: 200% auto; color: white; border: none; padding: 15px 40px; font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: background-position 0.5s, transform 0.2s, box-shadow 0.3s; font-weight: 600; box-shadow: 0 4px 20px rgba(184,149,42,0.3); }
+        .btn-gold:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(184,149,42,0.45); }
+        .btn-outline { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); padding: 14px 40px; font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .btn-outline:hover { background: var(--gold); color: white; box-shadow: 0 4px 20px rgba(184,149,42,0.3); }
+        .service-card { position: relative; overflow: hidden; cursor: pointer; }
+        .service-card img { width: 100%; height: 380px; object-fit: cover; display: block; transition: transform 0.7s ease; }
+        .service-card:hover img { transform: scale(1.08); }
+        .service-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.92) 0%, rgba(26,18,8,0.3) 55%, transparent 100%); padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .service-card .book-btn { opacity: 0; transform: translateY(10px); transition: all 0.3s ease; margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; color: var(--gold-pale); font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; background: none; border: none; }
+        .service-card:hover .book-btn { opacity: 1; transform: translateY(0); }
+        .gallery-item { overflow: hidden; position: relative; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.4s ease; filter: saturate(0.85) brightness(0.95); }
+        .gallery-item:hover img { transform: scale(1.07); filter: saturate(1.1) brightness(1); }
+        .gallery-item .gallery-hover { position: absolute; inset: 0; background: linear-gradient(to top, rgba(184,149,42,0.4), transparent); opacity: 0; transition: opacity 0.4s; }
+        .gallery-item:hover .gallery-hover { opacity: 1; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left {
-          opacity: 0; transform: translateX(-50px);
-          transition: opacity 0.9s ease, transform 0.9s ease;
-        }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.9s ease, transform 0.9s ease; }
         .reveal-left.visible { opacity: 1; transform: translateX(0); }
-        .reveal-right {
-          opacity: 0; transform: translateX(50px);
-          transition: opacity 0.9s ease, transform 0.9s ease;
-        }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.9s ease, transform 0.9s ease; }
         .reveal-right.visible { opacity: 1; transform: translateX(0); }
         .reveal-delay-1 { transition-delay: 0.15s; }
         .reveal-delay-2 { transition-delay: 0.3s; }
         .reveal-delay-3 { transition-delay: 0.45s; }
         .reveal-delay-4 { transition-delay: 0.6s; }
-
-        /* SERVICE CARDS */
-        .service-card {
-          position: relative; overflow: hidden;
-          cursor: pointer;
-        }
-        .service-card img {
-          width: 100%; height: 380px;
-          object-fit: cover; display: block;
-          transition: transform 0.7s ease;
-        }
-        .service-card:hover img { transform: scale(1.08); }
-        .service-overlay {
-          position: absolute; inset: 0;
-          background: linear-gradient(to top, rgba(26,18,8,0.92) 0%, rgba(26,18,8,0.3) 55%, transparent 100%);
-          padding: 28px; display: flex;
-          flex-direction: column; justify-content: flex-end;
-        }
-        .service-card .book-btn {
-          opacity: 0; transform: translateY(10px);
-          transition: all 0.3s ease;
-          margin-top: 12px;
-          display: inline-flex; align-items: center; gap: 8px;
-          color: var(--gold-pale);
-          font-family: 'Raleway', sans-serif;
-          font-size: 10px; letter-spacing: 3px;
-          text-transform: uppercase;
-        }
-        .service-card:hover .book-btn { opacity: 1; transform: translateY(0); }
-
-        /* GALLERY */
-        .gallery-item { overflow: hidden; position: relative; cursor: pointer; }
-        .gallery-item img {
-          width: 100%; height: 260px; object-fit: cover; display: block;
-          transition: transform 0.6s ease, filter 0.4s ease;
-          filter: saturate(0.85) brightness(0.95);
-        }
-        .gallery-item:hover img { transform: scale(1.07); filter: saturate(1.1) brightness(1); }
-        .gallery-item .gallery-hover {
-          position: absolute; inset: 0;
-          background: linear-gradient(to top, rgba(184,149,42,0.4), transparent);
-          opacity: 0; transition: opacity 0.4s;
-        }
-        .gallery-item:hover .gallery-hover { opacity: 1; }
-
-        /* GOLD DIVIDER */
-        .gold-line {
-          width: 70px; height: 1.5px;
-          background: linear-gradient(to right, var(--gold), var(--gold-pale), var(--gold));
-          margin: 18px auto;
-        }
-
-        /* SECTION LABEL */
-        .sec-label {
-          font-family: 'Raleway', sans-serif;
-          font-size: 10px; letter-spacing: 5px;
-          text-transform: uppercase; color: var(--gold);
-        }
-
-        /* TESTIMONIAL */
-        .testi-card {
-          background: white;
-          box-shadow: 0 8px 50px rgba(184,149,42,0.1);
-          border: 1px solid rgba(184,149,42,0.15);
-          padding: 48px 52px;
-          position: relative;
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .testi-card.entering { opacity: 1; transform: translateY(0); }
-        .testi-card.exiting { opacity: 0; transform: translateY(20px); }
-        .testi-big-quote {
-          font-family: 'Playfair Display', serif;
-          font-size: 140px; line-height: 1;
-          color: rgba(184,149,42,0.08);
-          position: absolute; top: -10px; left: 30px;
-          user-select: none; pointer-events: none;
-        }
-
-        /* INPUTS */
-        .form-input {
-          width: 100%; background: transparent;
-          border: none; border-bottom: 1px solid rgba(184,149,42,0.3);
-          color: var(--dark); padding: 14px 0;
-          font-family: 'Raleway', sans-serif; font-size: 13px;
-          letter-spacing: 0.5px; outline: none;
-          transition: border-color 0.3s;
-        }
+        .gold-line { width: 70px; height: 1.5px; background: linear-gradient(to right, var(--gold), var(--gold-pale), var(--gold)); margin: 18px auto; }
+        .sec-label { font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); }
+        .testi-card { background: white; box-shadow: 0 8px 50px rgba(184,149,42,0.1); border: 1px solid rgba(184,149,42,0.15); padding: 48px 52px; position: relative; }
+        .testi-big-quote { font-family: 'Playfair Display', serif; font-size: 140px; line-height: 1; color: rgba(184,149,42,0.08); position: absolute; top: -10px; left: 30px; user-select: none; pointer-events: none; }
+        .form-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(184,149,42,0.3); color: var(--dark); padding: 14px 0; font-family: 'Raleway', sans-serif; font-size: 13px; letter-spacing: 0.5px; outline: none; transition: border-color 0.3s; }
         .form-input::placeholder { color: rgba(138,124,110,0.5); }
         .form-input:focus { border-bottom-color: var(--gold); }
-
-        /* STATS */
-        .stat-num {
-          font-family: 'Playfair Display', serif;
-          font-size: 56px; font-weight: 400;
-          color: var(--gold); line-height: 1;
-        }
-
-        /* ORNAMENT */
-        .ornament {
-          display: flex; align-items: center; gap: 12px;
-          justify-content: center; margin: 20px 0;
-        }
-        .ornament-line {
-          flex: 1; max-width: 80px; height: 1px;
-          background: linear-gradient(to right, transparent, var(--gold));
-        }
-        .ornament-line.rev {
-          background: linear-gradient(to left, transparent, var(--gold));
-        }
-        .ornament-diamond {
-          width: 6px; height: 6px;
-          background: var(--gold);
-          transform: rotate(45deg);
-        }
-
-        /* TICKER */
-        @keyframes ticker {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .ticker-inner {
-          display: flex; white-space: nowrap;
-          animation: ticker 22s linear infinite;
-        }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 400; color: var(--gold); line-height: 1; }
+        .ornament { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 20px 0; }
+        .ornament-line { flex: 1; max-width: 80px; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+        .ornament-line.rev { background: linear-gradient(to left, transparent, var(--gold)); }
+        .ornament-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-inner { display: flex; white-space: nowrap; animation: ticker 22s linear infinite; }
         .ticker-inner:hover { animation-play-state: paused; }
-
-        /* FADE IN PAGE LOAD */
-        @keyframes pageLoad {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .hero-text-in {
-          animation: pageLoad 1s ease both;
-        }
+        @keyframes pageLoad { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-text-in { animation: pageLoad 1s ease both; }
         .hero-text-in-1 { animation-delay: 0.3s; }
         .hero-text-in-2 { animation-delay: 0.6s; }
         .hero-text-in-3 { animation-delay: 0.9s; }
         .hero-text-in-4 { animation-delay: 1.2s; }
-
-        @keyframes floatBadge {
-          0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-8px); }
-        }
+        @keyframes floatBadge { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
         .float-badge { animation: floatBadge 4s ease-in-out infinite; }
-
-        @keyframes shimmerLine {
-          0%   { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-
-        /* MOBILE MENU */
-        .mobile-overlay {
-          position: fixed; inset: 0; z-index: 200;
-          background: white;
-          display: flex; flex-direction: column;
-          align-items: center; justify-content: center;
-          gap: 36px;
-          transform: translateX(100%);
-          transition: transform 0.4s ease;
-        }
+        .mobile-overlay { position: fixed; inset: 0; z-index: 200; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; transform: translateX(100%); transition: transform 0.4s ease; }
         .mobile-overlay.open { transform: translateX(0); }
-
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
-          .hero-grid { grid-template-columns: 1fr !important; }
           .service-grid { grid-template-columns: 1fr 1fr !important; }
           .gallery-grid { grid-template-columns: 1fr 1fr !important; }
           .contact-grid { grid-template-columns: 1fr !important; }
+          .about-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
-      {/* ── MOBILE MENU ── */}
+      {/* MOBILE MENU */}
       <div className={`mobile-overlay${menuOpen ? " open" : ""}`}>
-        <button onClick={() => setMenuOpen(false)} style={{
-          position: "absolute", top: 24, right: 24,
-          background: "none", border: "none", fontSize: 28, color: "var(--gold)", cursor: "pointer"
-        }}>✕</button>
+        <button onClick={() => setMenuOpen(false)} style={{ position: "absolute", top: 24, right: 24, background: "none", border: "none", fontSize: 28, color: "var(--gold)", cursor: "pointer" }}>✕</button>
         <div style={{ textAlign: "center" }}>
           <div className="serif" style={{ fontSize: 32, fontWeight: 400, color: "var(--gold)", letterSpacing: 2 }}>PELUQUERO</div>
           <div className="sans" style={{ fontSize: 9, letterSpacing: 7, color: "#b8952a", marginTop: -2 }}>HERMANO</div>
         </div>
-        {["Home", "Services", "Gallery", "Contact"].map(l => (
-          <a key={l} href={`#${l.toLowerCase()}`} className="nav-link" onClick={() => setMenuOpen(false)}
-            style={{ fontSize: 14, letterSpacing: 4 }}>{l}</a>
+        {[["Inicio", "home"], ["Servicios", "services"], ["Galería", "gallery"], ["Contacto", "contact"]].map(([l, id]) => (
+          <a key={l} href={`#${id}`} className="nav-link" onClick={() => setMenuOpen(false)} style={{ fontSize: 14, letterSpacing: 4 }}>{l}</a>
         ))}
-        <button className="btn-gold">Book Appointment</button>
+        <button className="btn-gold" onClick={() => { setMenuOpen(false); setShowBooking(true); }}>Reservar Cita</button>
       </div>
 
-      {/* ── NAVBAR ── */}
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        padding: "20px 60px",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: scrolled ? "rgba(250,249,247,0.97)" : "rgba(250,249,247,0.15)",
-        borderBottom: scrolled ? "1px solid rgba(184,149,42,0.15)" : "none",
-        backdropFilter: "blur(12px)",
-        transition: "all 0.4s ease",
-        boxShadow: scrolled ? "0 2px 30px rgba(184,149,42,0.08)" : "none",
-      }}>
-        {/* Logo */}
-        <div style={{ lineHeight: 1 }}>
-          <div className="serif" style={{
-            fontSize: 22, fontWeight: 500, letterSpacing: 4,
-            color: scrolled ? "var(--dark)" : "white",
-            transition: "color 0.4s",
-          }}>PELUQUERO</div>
-          <div className="sans" style={{
-            fontSize: 8, letterSpacing: 8,
-            color: "var(--gold)", marginTop: 1,
-          }}>HERMANO</div>
-        </div>
+      {/* NAVBAR */}
+<nav style={{
+  position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+  padding: "20px 60px", display: "flex", alignItems: "center", justifyContent: "space-between",
+  background: scrolled ? "rgba(250,249,247,0.97)" : "rgba(250,249,247,0.15)",
+  borderBottom: scrolled ? "1px solid rgba(184,149,42,0.15)" : "none",
+  backdropFilter: "blur(12px)", transition: "all 0.4s ease",
+  boxShadow: scrolled ? "0 2px 30px rgba(184,149,42,0.08)" : "none",
+}}>
+  
+  
+  {/* LOGO & BRAND NAME CONTAINER */}
+<div style={{ display: "flex", alignItems: "center", gap: "1px", lineHeight: 1, paddingLeft: "20px",transition: "all 0.4s ease" }}>
+  <img 
+    src={logo}  
+    alt="Logo" 
+    style={{ 
+      height: "65px", 
+      width: "auto",
+      transition: "all 0.4s ease",
+      
+      
+    }} 
+  />
+  <div>
+    <div className="serif" style={{ fontSize: 22, fontWeight: 500, letterSpacing: 4, color: scrolled ? "var(--dark)" : "white", transition: "color 0.4s" }}>
+      PELUQUERO
+    </div>
+    <div className="sans" style={{ fontSize: 8, letterSpacing: 8, color: "var(--gold)", marginTop: 1 }}>
+      HERMANO
+    </div>
+  </div>
+</div>
 
-        {/* Desktop links */}
-        <div className="desktop-nav" style={{ display: "flex", gap: 40, alignItems: "center" }}>
-          {["Home", "Services", "Gallery", "Contact"].map(l => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="nav-link"
-              style={{ color: scrolled ? "var(--warm-gray)" : "rgba(255,255,255,0.85)" }}>
-              {l}
-            </a>
-          ))}
-          <button className="btn-gold" style={{ padding: "10px 24px", fontSize: 9 }}>
-            Book Now
-          </button>
-        </div>
+  <div className="desktop-nav" style={{ display: "flex", gap: 40, alignItems: "center" }}>
+    {[["Inicio", "home"], ["Servicios", "services"], ["Galería", "gallery"], ["Contacto", "contact"]].map(([l, id]) => (
+      <a key={l} href={`#${id}`} className="nav-link" style={{ color: scrolled ? "var(--warm-gray)" : "rgba(255,255,255,0.85)" }}>{l}</a>
+    ))}
+    <button className="btn-gold" style={{ padding: "10px 24px", fontSize: 9 }} onClick={() => setShowBooking(true)}>
+      Reservar
+    </button>
+  </div>
 
-        {/* Hamburger */}
-        <button className="hamburger" onClick={() => setMenuOpen(true)} style={{
-          display: "none", background: "none", border: "none", cursor: "pointer",
-          flexDirection: "column", gap: 5,
-        }}>
-          {[0,1,2].map(i => (
-            <div key={i} style={{ width: 24, height: 1.5, background: scrolled ? "var(--dark)" : "white" }} />
-          ))}
-        </button>
-      </nav>
+  <button className="hamburger" onClick={() => setMenuOpen(true)} style={{ display: "none", background: "none", border: "none", cursor: "pointer", flexDirection: "column", gap: 5 }}>
+    {[0, 1, 2].map(i => <div key={i} style={{ width: 24, height: 1.5, background: scrolled ? "var(--dark)" : "white" }} />)}
+  </button>
+</nav>
 
-      {/* ── HERO SLIDESHOW ── */}
+      {/* HERO */}
       <section id="home" style={{ height: "100vh", position: "relative", overflow: "hidden" }}>
-        {/* Slides */}
         {heroSlides.map((s, i) => (
-          <img
-            key={i}
-            src={s.img}
-            alt={s.heading}
-            className={`slide-img ${i === slide ? "active" : "inactive"}`}
-            style={{
-              position: "absolute", inset: 0,
-              width: "100%", height: "100%", objectFit: "cover",
-              opacity: i === slide ? 1 : 0,
-              transform: i === slide ? "scale(1.06)" : "scale(1)",
-              transition: "opacity 1s ease, transform 8s ease",
-            }}
-          />
+          <img key={i} src={s.img} alt={s.heading} style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+            opacity: i === slide ? 1 : 0, transform: i === slide ? "scale(1.06)" : "scale(1)",
+            transition: "opacity 1s ease, transform 8s ease",
+          }} />
         ))}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(26,18,8,0.78) 0%, rgba(26,18,8,0.35) 60%, rgba(26,18,8,0.1) 100%)" }} />
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "linear-gradient(to right, transparent 0%, var(--gold) 30%, var(--gold-pale) 50%, var(--gold) 70%, transparent 100%)" }} />
 
-        {/* Overlay */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to right, rgba(26,18,8,0.72) 0%, rgba(26,18,8,0.3) 60%, rgba(26,18,8,0.1) 100%)",
-        }} />
-
-        {/* Gold bottom border */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: 3,
-          background: "linear-gradient(to right, transparent 0%, var(--gold) 30%, var(--gold-pale) 50%, var(--gold) 70%, transparent 100%)",
-        }} />
-
-        {/* Hero content */}
-        <div style={{
-          position: "absolute", inset: 0,
-          display: "flex", flexDirection: "column",
-          justifyContent: "center", padding: "0 80px",
-          maxWidth: 780,
-        }}>
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 80px", maxWidth: 780 }}>
           <div className="hero-text-in hero-text-in-1 sec-label" style={{ color: "var(--gold-pale)", marginBottom: 20 }}>
             {heroSlides[slide].tag}
           </div>
-
           <h1 className="serif hero-text-in hero-text-in-2" style={{
-            fontSize: "clamp(54px, 7vw, 96px)",
-            fontWeight: 400, lineHeight: 1.08,
-            color: "white", margin: 0,
-            opacity: transitioning ? 0 : 1,
-            transform: transitioning ? "translateY(20px)" : "translateY(0)",
+            fontSize: "clamp(54px, 7vw, 96px)", fontWeight: 400, lineHeight: 1.08, color: "white", margin: 0,
+            opacity: transitioning ? 0 : 1, transform: transitioning ? "translateY(20px)" : "translateY(0)",
             transition: "opacity 0.5s ease, transform 0.5s ease",
           }}>
             {heroSlides[slide].heading}<br />
             <em style={{ color: "var(--gold-pale)" }}>{heroSlides[slide].sub}</em>
           </h1>
-
-          <div className="hero-text-in hero-text-in-3" style={{
-            display: "flex", alignItems: "center", gap: 12, margin: "24px 0 36px",
-          }}>
+          <div className="hero-text-in hero-text-in-3" style={{ display: "flex", alignItems: "center", gap: 12, margin: "24px 0 36px" }}>
             <div style={{ width: 50, height: 1, background: "var(--gold)" }} />
             <div className="sans" style={{ fontSize: 11, letterSpacing: 3, color: "rgba(255,255,255,0.7)" }}>
-              RAWALPINDI'S PREMIER SALON
+              BARBERÍA & GROOMING DE ÉLITE
             </div>
           </div>
-
           <div className="hero-text-in hero-text-in-4" style={{ display: "flex", gap: 16 }}>
-            <button className="btn-gold">Book Appointment</button>
+            <button className="btn-gold" onClick={() => setShowBooking(true)}>Reservar Cita</button>
             <button className="btn-outline" style={{ color: "white", borderColor: "rgba(255,255,255,0.5)" }}
               onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "white"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)"; }}>
-              Explore
+              <a href="#services" style={{ color: "inherit", textDecoration: "none" }}>Explorar</a>
             </button>
           </div>
         </div>
 
-        {/* Slide indicators */}
-        <div style={{
-          position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)",
-          display: "flex", gap: 10, alignItems: "center",
-        }}>
+        <div style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 10, alignItems: "center" }}>
           {heroSlides.map((_, i) => (
             <button key={i} onClick={() => manualSlide(i)} style={{
               width: i === slide ? 36 : 8, height: 3,
               background: i === slide ? "var(--gold-pale)" : "rgba(255,255,255,0.4)",
-              border: "none", cursor: "pointer", padding: 0,
-              transition: "all 0.4s ease", borderRadius: 2,
+              border: "none", cursor: "pointer", padding: 0, transition: "all 0.4s ease", borderRadius: 2,
             }} />
           ))}
         </div>
 
-        {/* Slide arrows */}
-        {[
-          { dir: -1, pos: { left: 24 }, label: "‹" },
-          { dir: 1,  pos: { right: 24 }, label: "›" },
-        ].map(({ dir, pos, label }) => (
+        {[{ dir: -1, pos: { left: 24 }, label: "‹" }, { dir: 1, pos: { right: 24 }, label: "›" }].map(({ dir, pos, label }) => (
           <button key={label} onClick={() => manualSlide((slide + dir + heroSlides.length) % heroSlides.length)}
             style={{
-              position: "absolute", top: "50%", transform: "translateY(-50%)",
-              ...pos,
-              background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.3)",
-              backdropFilter: "blur(4px)",
-              color: "white", width: 48, height: 48,
-              fontSize: 24, cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              transition: "all 0.3s",
+              position: "absolute", top: "50%", transform: "translateY(-50%)", ...pos,
+              background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.3)", backdropFilter: "blur(4px)",
+              color: "white", width: 48, height: 48, fontSize: 24, cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s",
             }}
             onMouseEnter={e => e.currentTarget.style.background = "rgba(184,149,42,0.5)"}
-            onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}
-          >
+            onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}>
             {label}
           </button>
         ))}
 
-        {/* Floating badge */}
         <div className="float-badge" style={{
           position: "absolute", bottom: 100, right: 60,
-          background: "rgba(250,249,247,0.95)",
-          border: "1px solid rgba(184,149,42,0.3)",
-          backdropFilter: "blur(10px)",
-          padding: "20px 28px",
-          minWidth: 210,
+          background: "rgba(250,249,247,0.95)", border: "1px solid rgba(184,149,42,0.3)",
+          backdropFilter: "blur(10px)", padding: "20px 28px", minWidth: 210,
           boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
         }}>
-          <div className="sans" style={{ fontSize: 9, letterSpacing: 4, color: "var(--gold)", textTransform: "uppercase" }}>
-            Special Offer
-          </div>
-          <div className="serif" style={{ fontSize: 20, marginTop: 6, color: "var(--dark)" }}>
-            Bridal Packages
-          </div>
-          <div className="sans" style={{ fontSize: 11, color: "var(--warm-gray)", marginTop: 4 }}>
-            20% off — Book This Month
-          </div>
+          <div className="sans" style={{ fontSize: 9, letterSpacing: 4, color: "var(--gold)", textTransform: "uppercase" }}>Oferta Especial</div>
+          <div className="serif" style={{ fontSize: 20, marginTop: 6, color: "var(--dark)" }}>Corte + Barba</div>
+          <div className="sans" style={{ fontSize: 11, color: "var(--warm-gray)", marginTop: 4 }}>15% dto — Reserva Este Mes</div>
         </div>
       </section>
 
-      {/* ── TICKER STRIP ── */}
-      <div style={{
-        background: "var(--gold)",
-        padding: "14px 0", overflow: "hidden",
-      }}>
+      {/* TICKER */}
+      <div style={{ background: "var(--gold)", padding: "14px 0", overflow: "hidden" }}>
         <div className="ticker-inner">
           {[...Array(6)].fill(null).map((_, i) => (
-            <span key={i} className="sans" style={{
-              fontSize: 10, letterSpacing: 4, color: "white",
-              textTransform: "uppercase", paddingRight: 60,
-              display: "inline-flex", alignItems: "center", gap: 24,
-            }}>
+            <span key={i} className="sans" style={{ fontSize: 10, letterSpacing: 4, color: "white", textTransform: "uppercase", paddingRight: 60, display: "inline-flex", alignItems: "center", gap: 24 }}>
               Peluquero Hermano
               <span style={{ display: "inline-block", width: 4, height: 4, background: "rgba(255,255,255,0.6)", transform: "rotate(45deg)" }} />
-              Premium Salon & Spa
+              Barbería & Grooming Premium
               <span style={{ display: "inline-block", width: 4, height: 4, background: "rgba(255,255,255,0.6)", transform: "rotate(45deg)" }} />
-              Rawalpindi's Finest
+              Lo Mejor en Estilo Masculino
               <span style={{ display: "inline-block", width: 4, height: 4, background: "rgba(255,255,255,0.6)", transform: "rotate(45deg)" }} />
             </span>
           ))}
         </div>
       </div>
 
-      {/* ── ABOUT / STATS ── */}
+      {/* ABOUT */}
       <section ref={registerRef("about")} id="about" style={{ padding: "100px 80px", background: "var(--cream)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
           <div className={`reveal-left ${isVisible("about") ? "visible" : ""}`}>
-            <div className="sec-label" style={{ marginBottom: 16 }}>About Us</div>
+            <div className="sec-label" style={{ marginBottom: 16 }}>Sobre Nosotros</div>
             <h2 className="serif" style={{ fontSize: 52, fontWeight: 400, lineHeight: 1.15, margin: "0 0 10px", color: "var(--dark)" }}>
-              The Art of<br /><em style={{ color: "var(--gold)" }}>Fine Beauty</em>
+              El Arte del<br /><em style={{ color: "var(--gold)" }}>Caballero</em>
             </h2>
             <div className="ornament" style={{ justifyContent: "flex-start" }}>
               <div style={{ width: 70, height: 1.5, background: "linear-gradient(to right, var(--gold), transparent)" }} />
               <div style={{ width: 6, height: 6, background: "var(--gold)", transform: "rotate(45deg)" }} />
             </div>
             <p className="sans" style={{ fontSize: 13.5, lineHeight: 2, color: "var(--warm-gray)", maxWidth: 460, marginBottom: 32 }}>
-              Peluquero Hermano is more than a salon — it is a sanctuary. Our master stylists blend artistry with technique, using the finest European products to craft transformations that resonate with who you truly are. Every appointment is a ritual.
+              Peluquero Hermano es más que una barbería — es un santuario para el hombre moderno. Nuestros maestros barberos combinan arte y técnica, utilizando los mejores productos para esculpir looks que definen tu identidad. Cada visita es un ritual de distinción.
             </p>
-            <button className="btn-gold">Our Story</button>
+            <button className="btn-gold" onClick={() => setShowBooking(true)}>Reservar Ahora</button>
           </div>
-
           <div className={`reveal-right ${isVisible("about") ? "visible" : ""}`}>
             <div style={{ position: "relative" }}>
-              <img
-                src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=85"
-                alt="Salon interior"
-                style={{ width: "100%", height: 420, objectFit: "cover", display: "block" }}
-              />
-              {/* Overlapping stats card */}
+              <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=85" alt="Barbería interior"
+                style={{ width: "100%", height: 420, objectFit: "cover", display: "block" }} />
               <div style={{
-                position: "absolute", bottom: -30, left: -30,
-                background: "white", padding: "28px 36px",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(184,149,42,0.2)",
+                position: "absolute", bottom: -30, left: -30, background: "white",
+                padding: "28px 36px", boxShadow: "0 20px 60px rgba(0,0,0,0.1)", border: "1px solid rgba(184,149,42,0.2)",
               }}>
                 <div style={{ display: "flex", gap: 36 }}>
-                  {[["2,400+", "Happy Clients"], ["8+", "Years"], ["12", "Experts"]].map(([n, l]) => (
+                  {[["1,800+", "Clientes"], ["6+", "Años"], ["8", "Maestros"]].map(([n, l]) => (
                     <div key={l} style={{ textAlign: "center" }}>
                       <div className="stat-num">{n}</div>
                       <div className="sans" style={{ fontSize: 9, letterSpacing: 2, color: "var(--warm-gray)", textTransform: "uppercase", marginTop: 4 }}>{l}</div>
@@ -699,203 +734,144 @@ export default function PeluqueroHermano() {
                   ))}
                 </div>
               </div>
-              {/* Gold corner decoration */}
-              <div style={{
-                position: "absolute", top: -12, right: -12,
-                width: 60, height: 60,
-                border: "2px solid var(--gold)", borderLeft: "none", borderBottom: "none",
-              }} />
+              <div style={{ position: "absolute", top: -12, right: -12, width: 60, height: 60, border: "2px solid var(--gold)", borderLeft: "none", borderBottom: "none" }} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES ── */}
+      {/* SERVICES */}
       <section ref={registerRef("services")} id="services" style={{ padding: "100px 80px", background: "white" }}>
         <div className={`reveal ${isVisible("services") ? "visible" : ""}`} style={{ textAlign: "center", marginBottom: 60 }}>
-          <div className="sec-label" style={{ marginBottom: 16 }}>What We Offer</div>
+          <div className="sec-label" style={{ marginBottom: 16 }}>Lo Que Ofrecemos</div>
           <h2 className="serif" style={{ fontSize: 54, fontWeight: 400, color: "var(--dark)", margin: 0 }}>
-            Our <em style={{ color: "var(--gold)" }}>Services</em>
+            Nuestros <em style={{ color: "var(--gold)" }}>Servicios</em>
           </h2>
           <div className="ornament"><div className="ornament-line" /><div className="ornament-diamond" /><div className="ornament-line rev" /></div>
         </div>
-
         <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 3 }}>
           {services.map((s, i) => (
-            <div
-              key={i}
-              className={`service-card reveal ${isVisible("services") ? "visible" : ""} reveal-delay-${i + 1}`}
-            >
+            <div key={i} className={`service-card reveal ${isVisible("services") ? "visible" : ""} reveal-delay-${i + 1}`}>
               <img src={s.img} alt={s.title} />
               <div className="service-overlay">
-                <div className="sans" style={{ fontSize: 9, letterSpacing: 3, color: "var(--gold-pale)", textTransform: "uppercase", marginBottom: 8 }}>
-                  {s.price}
-                </div>
-                <h3 className="serif" style={{ fontSize: 24, fontWeight: 400, margin: "0 0 8px", color: "white" }}>
-                  {s.title}
-                </h3>
-                <p className="sans" style={{ fontSize: 12, color: "rgba(255,255,255,0.75)", lineHeight: 1.65, margin: 0 }}>
-                  {s.desc}
-                </p>
-                <div className="book-btn">
-                  Book This Service →
-                </div>
+                <div className="sans" style={{ fontSize: 9, letterSpacing: 3, color: "var(--gold-pale)", textTransform: "uppercase", marginBottom: 8 }}>{s.price}</div>
+                <h3 className="serif" style={{ fontSize: 24, fontWeight: 400, margin: "0 0 8px", color: "white" }}>{s.title}</h3>
+                <p className="sans" style={{ fontSize: 12, color: "rgba(255,255,255,0.75)", lineHeight: 1.65, margin: 0 }}>{s.desc}</p>
+                <button className="book-btn" onClick={() => setShowBooking(true)}>Reservar Este Servicio →</button>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── QUOTE BANNER ── */}
-      <div style={{
-        padding: "80px 80px",
-        background: "linear-gradient(135deg, #1a1208 0%, #2d1f0a 100%)",
-        textAlign: "center", position: "relative", overflow: "hidden",
-      }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle at 30% 50%, rgba(184,149,42,0.07) 0%, transparent 60%), radial-gradient(circle at 70% 50%, rgba(184,149,42,0.05) 0%, transparent 60%)",
-        }} />
-        <div className="serif" style={{
-          fontSize: "clamp(24px, 4vw, 42px)", fontStyle: "italic",
-          color: "white", lineHeight: 1.5, position: "relative",
-        }}>
-          "Beauty is not in the face —<br />
-          <span style={{ color: "var(--gold-pale)" }}>beauty is a light in the heart."</span>
+      {/* QUOTE BANNER */}
+      <div style={{ padding: "80px 80px", background: "linear-gradient(135deg, #1a1208 0%, #2d1f0a 100%)", textAlign: "center", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%, rgba(184,149,42,0.07) 0%, transparent 60%), radial-gradient(circle at 70% 50%, rgba(184,149,42,0.05) 0%, transparent 60%)" }} />
+        <div className="serif" style={{ fontSize: "clamp(24px, 4vw, 42px)", fontStyle: "italic", color: "white", lineHeight: 1.5, position: "relative" }}>
+          "El estilo es una forma de decir<br />
+          <span style={{ color: "var(--gold-pale)" }}>quién eres sin tener que hablar."</span>
         </div>
         <div className="ornament" style={{ marginTop: 24 }}>
           <div className="ornament-line" /><div className="ornament-diamond" /><div className="ornament-line rev" />
         </div>
-        <div className="sans" style={{ fontSize: 10, letterSpacing: 4, color: "var(--gold)", textTransform: "uppercase", marginTop: 8 }}>
-          — Kahlil Gibran
-        </div>
+        <div className="sans" style={{ fontSize: 10, letterSpacing: 4, color: "var(--gold)", textTransform: "uppercase", marginTop: 8 }}>— Rachel Zoe</div>
       </div>
 
-      {/* ── GALLERY ── */}
+      {/* GALLERY */}
       <section ref={registerRef("gallery")} id="gallery" style={{ padding: "100px 80px", background: "var(--cream)" }}>
         <div className={`reveal ${isVisible("gallery") ? "visible" : ""}`} style={{ textAlign: "center", marginBottom: 60 }}>
-          <div className="sec-label" style={{ marginBottom: 16 }}>Portfolio</div>
+          <div className="sec-label" style={{ marginBottom: 16 }}>Nuestro Trabajo</div>
           <h2 className="serif" style={{ fontSize: 54, fontWeight: 400, color: "var(--dark)", margin: 0 }}>
-            The <em style={{ color: "var(--gold)" }}>Gallery</em>
+            La <em style={{ color: "var(--gold)" }}>Galería</em>
           </h2>
           <div className="ornament"><div className="ornament-line" /><div className="ornament-diamond" /><div className="ornament-line rev" /></div>
         </div>
-
         <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
           {gallery.map((src, i) => (
-            <div
-              key={i}
-              className={`gallery-item reveal ${isVisible("gallery") ? "visible" : ""} reveal-delay-${(i % 4) + 1}`}
-              style={{ gridRow: i === 0 || i === 4 ? "span 2" : "span 1" }}
-            >
-              <img src={src} alt={`Gallery ${i}`} style={{ height: i === 0 || i === 4 ? "526px" : "260px" }} />
+            <div key={i} className={`gallery-item reveal ${isVisible("gallery") ? "visible" : ""} reveal-delay-${(i % 4) + 1}`}
+              style={{ gridRow: i === 0 || i === 4 ? "span 2" : "span 1" }}>
+              <img src={src} alt={`Galería ${i}`} style={{ height: i === 0 || i === 4 ? "526px" : "260px" }} />
               <div className="gallery-hover" />
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section ref={registerRef("testi")} style={{ padding: "100px 80px", background: "var(--gold-bg)" }}>
+      {/* TESTIMONIALS */}
+      <section ref={registerRef("testi")} id="testi" style={{ padding: "100px 80px", background: "var(--gold-bg)" }}>
         <div className={`reveal ${isVisible("testi") ? "visible" : ""}`} style={{ textAlign: "center", marginBottom: 60 }}>
-          <div className="sec-label" style={{ marginBottom: 16 }}>Client Love</div>
+          <div className="sec-label" style={{ marginBottom: 16 }}>Opiniones</div>
           <h2 className="serif" style={{ fontSize: 54, fontWeight: 400, color: "var(--dark)", margin: 0 }}>
-            What They <em style={{ color: "var(--gold)" }}>Say</em>
+            Lo Que <em style={{ color: "var(--gold)" }}>Dicen</em>
           </h2>
           <div className="ornament"><div className="ornament-line" /><div className="ornament-diamond" /><div className="ornament-line rev" /></div>
         </div>
-
         <div className={`reveal ${isVisible("testi") ? "visible" : ""}`} style={{ maxWidth: 740, margin: "0 auto" }}>
           <div className="testi-card">
             <div className="testi-big-quote">"</div>
-            <p className="serif" style={{
-              fontSize: 22, fontStyle: "italic", lineHeight: 1.75,
-              color: "var(--dark)", margin: "0 0 32px",
-              position: "relative", zIndex: 1,
-              opacity: 1, transition: "opacity 0.4s",
-            }}>
+            <p className="serif" style={{ fontSize: 22, fontStyle: "italic", lineHeight: 1.75, color: "var(--dark)", margin: "0 0 32px", position: "relative", zIndex: 1 }}>
               "{testimonials[testimonialIdx].text}"
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-              <img
-                src={testimonials[testimonialIdx].avatar}
-                alt={testimonials[testimonialIdx].name}
-                style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(184,149,42,0.4)" }}
-              />
+              <img src={testimonials[testimonialIdx].avatar} alt={testimonials[testimonialIdx].name}
+                style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(184,149,42,0.4)" }} />
               <div>
-                <div className="serif" style={{ fontSize: 18, color: "var(--dark)", fontWeight: 500 }}>
-                  {testimonials[testimonialIdx].name}
-                </div>
-                <div className="sans" style={{ fontSize: 9, letterSpacing: 3, color: "var(--gold)", textTransform: "uppercase", marginTop: 3 }}>
-                  {testimonials[testimonialIdx].role}
-                </div>
+                <div className="serif" style={{ fontSize: 18, color: "var(--dark)", fontWeight: 500 }}>{testimonials[testimonialIdx].name}</div>
+                <div className="sans" style={{ fontSize: 9, letterSpacing: 3, color: "var(--gold)", textTransform: "uppercase", marginTop: 3 }}>{testimonials[testimonialIdx].role}</div>
               </div>
-              {/* Stars */}
               <div style={{ marginLeft: "auto", display: "flex", gap: 3 }}>
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{ color: "var(--gold)", fontSize: 14 }}>★</span>
-                ))}
+                {[...Array(5)].map((_, i) => <span key={i} style={{ color: "var(--gold)", fontSize: 14 }}>★</span>)}
               </div>
             </div>
           </div>
-
-          {/* Dots */}
           <div style={{ display: "flex", gap: 10, justifyContent: "center", marginTop: 28 }}>
             {testimonials.map((_, i) => (
               <button key={i} onClick={() => setTestimonialIdx(i)} style={{
                 width: i === testimonialIdx ? 28 : 8, height: 3,
                 background: i === testimonialIdx ? "var(--gold)" : "rgba(184,149,42,0.3)",
-                border: "none", cursor: "pointer", padding: 0,
-                transition: "all 0.4s", borderRadius: 2,
+                border: "none", cursor: "pointer", padding: 0, transition: "all 0.4s", borderRadius: 2,
               }} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CONTACT ── */}
+      {/* CONTACT */}
       <section ref={registerRef("contact")} id="contact" style={{ padding: "100px 80px", background: "white" }}>
         <div className={`reveal ${isVisible("contact") ? "visible" : ""}`} style={{ textAlign: "center", marginBottom: 70 }}>
-          <div className="sec-label" style={{ marginBottom: 16 }}>Reserve Your Seat</div>
+          <div className="sec-label" style={{ marginBottom: 16 }}>Reserva Tu Plaza</div>
           <h2 className="serif" style={{ fontSize: 54, fontWeight: 400, color: "var(--dark)", margin: 0 }}>
-            Book an <em style={{ color: "var(--gold)" }}>Appointment</em>
+            Pide tu <em style={{ color: "var(--gold)" }}>Cita</em>
           </h2>
           <div className="ornament"><div className="ornament-line" /><div className="ornament-diamond" /><div className="ornament-line rev" /></div>
         </div>
-
         <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, maxWidth: 1000, margin: "0 auto" }}>
           <div className={`reveal-left ${isVisible("contact") ? "visible" : ""}`}>
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              {["Full Name", "Email Address", "Phone Number"].map(p => (
+              {["Nombre Completo", "Correo Electrónico", "Número de Teléfono"].map(p => (
                 <input key={p} placeholder={p} className="form-input sans" />
               ))}
               <select className="form-input sans" style={{ cursor: "pointer" }}>
-                <option value="">Select a Service</option>
+                <option value="">Seleccionar Servicio</option>
                 {services.map(s => <option key={s.title}>{s.title}</option>)}
               </select>
-              <textarea placeholder="Preferred date, time or any special requests..." className="form-input sans" rows={4} style={{ resize: "none" }} />
-              <button className="btn-gold" style={{ alignSelf: "flex-start" }}>
-                Send Appointment Request
+              <textarea placeholder="Fecha preferida, hora o cualquier petición especial..." className="form-input sans" rows={4} style={{ resize: "none" }} />
+              <button className="btn-gold" style={{ alignSelf: "flex-start" }} onClick={() => setShowBooking(true)}>
+                Enviar Solicitud de Cita
               </button>
             </div>
           </div>
-
           <div className={`reveal-right ${isVisible("contact") ? "visible" : ""}`}>
-            <img
-              src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=85"
-              alt="Salon"
-              style={{ width: "100%", height: 280, objectFit: "cover", marginBottom: 36, display: "block" }}
-            />
+            <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=85" alt="Barbería"
+              style={{ width: "100%", height: 280, objectFit: "cover", marginBottom: 36, display: "block" }} />
             {[
-              ["Location", "Blue Area, Rawalpindi, Punjab"],
-              ["Phone", "+92 51 234 5678"],
-              ["Email", "hello@peluquerohermano.pk"],
-              ["Hours", "Tuesday – Sunday: 10am – 8pm"],
+              ["Ubicación", "Calle Serrano 45, Madrid, España"],
+              ["Teléfono", "+34 91 234 5678"],
+              ["Email", "hola@peluquerohermano.es"],
+              ["Horario", "Martes – Domingo: 10:00 – 20:00"],
             ].map(([label, val]) => (
               <div key={label} style={{ display: "flex", gap: 24, marginBottom: 20, alignItems: "flex-start", borderBottom: "1px solid rgba(184,149,42,0.1)", paddingBottom: 20 }}>
-                <div className="sans" style={{ fontSize: 9, letterSpacing: 3, color: "var(--gold)", textTransform: "uppercase", width: 72, flexShrink: 0, paddingTop: 2 }}>
-                  {label}
-                </div>
+                <div className="sans" style={{ fontSize: 9, letterSpacing: 3, color: "var(--gold)", textTransform: "uppercase", width: 72, flexShrink: 0, paddingTop: 2 }}>{label}</div>
                 <div className="sans" style={{ fontSize: 13, color: "var(--warm-gray)" }}>{val}</div>
               </div>
             ))}
@@ -903,26 +879,13 @@ export default function PeluqueroHermano() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer style={{
-        background: "var(--dark)", padding: "50px 80px",
-        borderTop: "3px solid var(--gold)",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        flexWrap: "wrap", gap: 24,
-      }}>
+      {/* FOOTER */}
+      <footer style={{ background: "var(--dark)", padding: "50px 80px", borderTop: "3px solid var(--gold)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
         <div>
-          <div className="serif" style={{ fontSize: 22, fontWeight: 500, letterSpacing: 4, color: "var(--gold-pale)" }}>
-            PELUQUERO HERMANO
-          </div>
-          <div className="sans" style={{ fontSize: 10, letterSpacing: 3, color: "rgba(184,149,42,0.5)", marginTop: 4 }}>
-            Salon & Spa · Est. 2019
-          </div>
+          <div className="serif" style={{ fontSize: 22, fontWeight: 500, letterSpacing: 4, color: "var(--gold-pale)" }}>PELUQUERO HERMANO</div>
+          <div className="sans" style={{ fontSize: 10, letterSpacing: 3, color: "rgba(184,149,42,0.5)", marginTop: 4 }}>Barbería & Grooming · Est. 2019</div>
         </div>
-
-        <div className="sans" style={{ fontSize: 11, color: "rgba(184,149,42,0.4)", letterSpacing: 1, textAlign: "center" }}>
-          © 2026 Peluquero Hermano. All rights reserved.
-        </div>
-
+        <div className="sans" style={{ fontSize: 11, color: "rgba(184,149,42,0.4)", letterSpacing: 1, textAlign: "center" }}>© 2026 Peluquero Hermano. Todos los derechos reservados.</div>
         <div style={{ display: "flex", gap: 28 }}>
           {["Instagram", "Facebook", "TikTok"].map(s => (
             <span key={s} className="nav-link" style={{ color: "rgba(184,149,42,0.5)", cursor: "pointer" }}
