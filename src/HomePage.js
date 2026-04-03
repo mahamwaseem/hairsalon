@@ -436,7 +436,7 @@ function BookingPage({ onBack }) {
   );
 }
 
-export default function PeluqueroHermano() {
+export default function PeluqueroHermano({ onNavigateToContact = () => {} }) {
   const [showBooking, setShowBooking] = useState(false);
   const [slide, setSlide] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
@@ -606,7 +606,7 @@ export default function PeluqueroHermano() {
           <div className="sans" style={{ fontSize: 9, letterSpacing: 7, color: "#b8952a", marginTop: -2 }}>HERMANO</div>
         </div>
         {[["Inicio", "home"], ["Servicios", "services"], ["Galería", "gallery"], ["Contacto", "contact"]].map(([l, id]) => (
-          <a key={l} href={`#${id}`} className="nav-link" onClick={() => setMenuOpen(false)} style={{ fontSize: 14, letterSpacing: 4 }}>{l}</a>
+          <a key={l} href={id === "contact" ? "#" : `#${id}`} className="nav-link" onClick={(e) => { if (id === "contact") { e.preventDefault(); onNavigateToContact(); } }} style={{ fontSize: 14, letterSpacing: 4 }}>{l}</a>
         ))}
         <button className="btn-gold" onClick={() => { setMenuOpen(false); setShowBooking(true); }}>Reservar Cita</button>
       </div>
@@ -634,7 +634,7 @@ export default function PeluqueroHermano() {
 
         <div className="desktop-nav" style={{ display: "flex", gap: 40, alignItems: "center" }}>
           {[["Inicio", "home"], ["Servicios", "services"], ["Galería", "gallery"], ["Contacto", "contact"]].map(([l, id]) => (
-            <a key={l} href={`#${id}`} className="nav-link" style={{ color: scrolled ? "var(--warm-gray)" : "rgba(255,255,255,0.85)" }}>{l}</a>
+            <a key={l} href={id === "contact" ? "#" : `#${id}`} className="nav-link" onClick={(e) => { if (id === "contact") { e.preventDefault(); onNavigateToContact(); } }} style={{ color: scrolled ? "var(--warm-gray)" : "rgba(255,255,255,0.85)" }}>{l}</a>
           ))}
           <button className="btn-gold" style={{ padding: "10px 24px", fontSize: 9 }} onClick={() => setShowBooking(true)}>
             Reservar
